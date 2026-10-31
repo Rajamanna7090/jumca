@@ -14,7 +14,7 @@ export interface Course {
   tags: Tag[];
   units: Unit[];
   books: string[];
-  elective?: "I" | "II" | "III";
+  elective?: "I" | "II" | "III" | undefined;
 }
 
 export interface Semester {

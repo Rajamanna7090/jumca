@@ -72,7 +72,7 @@ export const actions = {
 
 export function youtubeId(url: string): string | null {
   const m = url.match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
-  return m ? m[1] : /^[\w-]{11}$/.test(url) ? url : null;
+  return m?.[1] ? m[1] : /^[\w-]{11}$/.test(url) ? url : null;
 }
 
 export function fmtTime(sec: number) {
