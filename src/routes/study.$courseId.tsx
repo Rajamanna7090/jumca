@@ -96,7 +96,7 @@ function StudyPage() {
   );
 }
 
-function VideoPane({ courseId, title, videoUrl, playerRef }: { courseId: string; title: string; videoUrl?: string; playerRef: React.MutableRefObject<YTPlayer | null> }) {
+function VideoPane({ courseId, title, videoUrl, playerRef }: { courseId: string; title: string; videoUrl?: string | undefined; playerRef: React.MutableRefObject<YTPlayer | null> }) {
   const [input, setInput] = useState("");
   const host = useRef<HTMLDivElement>(null);
   const vid = videoUrl ? youtubeId(videoUrl) : null;
