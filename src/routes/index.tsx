@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { ArrowUpRight, BookOpen, Check, Flame, Sparkles } from "lucide-react";
 import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } from "@/data/syllabus";
 import { actions, useAppState } from "@/lib/store";
@@ -120,7 +120,7 @@ function Dashboard() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: React.ReactNode }) {
+function Stat({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="glass rounded-2xl p-5">
       <div className="font-display text-3xl tracking-tight md:text-4xl">{value}</div>
