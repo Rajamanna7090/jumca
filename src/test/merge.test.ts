@@ -8,6 +8,6 @@ describe("mergeStates", () => {
   });
   it("never unmarks a locally completed unit", () => {
     const m = mergeStates({ done: { a: true }, electives: {}, spaces: {} }, { done: { a: false } });
-    expect(m.done.a).toBe(true);
+    expect(m.done['a']).toBe(true);
   });
 });

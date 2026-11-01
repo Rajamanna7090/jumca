@@ -12,8 +12,8 @@ export interface Material {
   url: string;
 }
 export interface CourseSpace {
-  videoUrl?: string;
-  notes?: string;
+  videoUrl?: string | undefined;
+  notes?: string | undefined;
   bookmarks?: Bookmark[];
   materials?: Material[];
 }

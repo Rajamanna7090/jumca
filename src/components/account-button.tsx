@@ -33,8 +33,8 @@ export function AccountButton() {
     );
   }
 
-  const avatar = user.user_metadata?.avatar_url as string | undefined;
-  const name = (user.user_metadata?.full_name as string | undefined) ?? user.email;
+  const avatar = user.user_metadata?.['avatar_url'] as string | undefined;
+  const name = (user.user_metadata?.['full_name'] as string | undefined) ?? user.email;
   return (
     <div className="flex items-center gap-2 rounded-full border border-border bg-card/60 py-1 pl-1 pr-3 backdrop-blur">
       {avatar ? (
