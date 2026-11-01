@@ -63,7 +63,7 @@ function StudyPage() {
   const color = toneVar(course.semester.tone);
   const p = courseProgress(course, state.done);
 
-  const video = <VideoPane courseId={id} title={course.title} units={course.units.map((u: any) => u.title ?? u.name ?? "")} videoUrl={space.videoUrl} playerRef={playerRef} />;
+  const video = <VideoPane courseId={id} title={course.title} units={course.units.map((u) => u.title)} videoUrl={space.videoUrl} playerRef={playerRef} />;
   const side = <SidePane courseId={id} color={color} playerRef={playerRef} />;
 
   return (
