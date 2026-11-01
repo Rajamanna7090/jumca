@@ -9,6 +9,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Ring, toneVar } from "@/components/kinetic";
 import { UnitRow } from "./index";
 import { cn } from "@/lib/utils";
+import { LectureExplorer } from "@/components/lecture-explorer";
 
 export const Route = createFileRoute("/study/$courseId")({
   loader: ({ params }) => {
@@ -62,7 +63,7 @@ function StudyPage() {
   const color = toneVar(course.semester.tone);
   const p = courseProgress(course, state.done);
 
-  const video = <VideoPane courseId={id} title={course.title} videoUrl={space.videoUrl} playerRef={playerRef} />;
+  const video = <VideoPane courseId={id} title={course.title} units={course.units.map((u) => u.title)} videoUrl={space.videoUrl} playerRef={playerRef} />;
   const side = <SidePane courseId={id} color={color} playerRef={playerRef} />;
 
   return (
@@ -96,8 +97,9 @@ function StudyPage() {
   );
 }
 
-function VideoPane({ courseId, title, videoUrl, playerRef }: { courseId: string; title: string; videoUrl?: string | undefined; playerRef: React.MutableRefObject<YTPlayer | null> }) {
+function VideoPane({ courseId, title, units, videoUrl, playerRef }: { courseId: string; title: string; units: string[]; videoUrl?: string | undefined; playerRef: React.MutableRefObject<YTPlayer | null> }) {
   const [input, setInput] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
   const host = useRef<HTMLDivElement>(null);
   const vid = videoUrl ? youtubeId(videoUrl) : null;
 
@@ -144,6 +146,15 @@ function VideoPane({ courseId, title, videoUrl, playerRef }: { courseId: string;
             </div>
           </div>
         )}
+        <AnimatePresence>
+          {searchOpen && (
+            <LectureExplorer
+              topics={[title, ...units.filter(Boolean)]}
+              onPick={(id) => { actions.updateSpace(courseId, { videoUrl: `https://www.youtube.com/watch?v=${id}` }); setSearchOpen(false); }}
+              onClose={() => setSearchOpen(false)}
+            />
+          )}
+        </AnimatePresence>
       </div>
       <div className="mt-3 flex gap-2">
         <input
@@ -154,15 +165,13 @@ function VideoPane({ courseId, title, videoUrl, playerRef }: { courseId: string;
           className="min-w-0 flex-1 rounded-full border bg-card px-4 py-2 text-sm outline-none focus:border-primary"
         />
         <button onClick={submit} className="rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground">Load</button>
-        <a
-          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(title + " lecture")}`}
-          target="_blank"
-          rel="noreferrer"
-          className="grid size-9 shrink-0 place-items-center rounded-full border text-muted-foreground hover:text-foreground"
-          aria-label="Find lectures on YouTube"
+        <button
+          onClick={() => setSearchOpen((o) => !o)}
+          className={cn("grid size-9 shrink-0 place-items-center rounded-full border text-muted-foreground hover:text-foreground", searchOpen && "border-primary text-primary")}
+          aria-label="Find lectures"
         >
           <Search className="size-4" />
-        </a>
+        </button>
       </div>
     </div>
   );
