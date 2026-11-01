@@ -15,7 +15,7 @@ export const searchYouTube = createServerFn({ method: "GET" })
     const m = html.match(/var ytInitialData = (\{.*?\});<\/script>/s);
     if (!m) return [];
     let json: any;
-    try { json = JSON.parse(m[1]); } catch { return []; }
+    try { json = JSON.parse(m[1] ?? ""); } catch { return []; }
     const out: YTResult[] = [];
     const walk = (n: any) => {
       if (!n || typeof n !== "object" || out.length >= 20) return;
