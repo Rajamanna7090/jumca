@@ -6,6 +6,7 @@ import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } f
 import { actions, useAppState } from "@/lib/store";
 import { CountUp, KineticText, Ring, toneVar } from "@/components/kinetic";
 import { cn } from "@/lib/utils";
+import { AccountButton } from "@/components/account-button";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -48,7 +49,10 @@ function Dashboard() {
             </span>
             Orbit
           </div>
-          <span className="font-mono text-xs text-muted-foreground">JU · MCA 2-Year</span>
+          <div className="flex items-center gap-3">
+            <span className="hidden font-mono text-xs text-muted-foreground sm:inline">JU · MCA 2-Year</span>
+            <AccountButton />
+          </div>
         </header>
 
         <section className="mt-16 md:mt-24">

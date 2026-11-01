@@ -12,8 +12,8 @@ export interface Material {
   url: string;
 }
 export interface CourseSpace {
-  videoUrl?: string;
-  notes?: string;
+  videoUrl?: string | undefined;
+  notes?: string | undefined;
   bookmarks?: Bookmark[];
   materials?: Material[];
 }
@@ -40,11 +40,46 @@ function load() {
   }
 }
 
-export function setState(fn: (s: AppState) => AppState) {
+export function setState(fn: (s: AppState) => AppState, opts: { sync?: boolean } = {}) {
   load();
   state = fn(state);
   localStorage.setItem(KEY, JSON.stringify(state));
   listeners.forEach((l) => l());
+  if (opts.sync !== false) scheduleSync?.();
+}
+
+let scheduleSync: (() => void) | null = null;
+export function registerSync(fn: (() => void) | null) {
+  scheduleSync = fn;
+}
+export function getState() {
+  load();
+  return state;
+}
+
+/** Merge guest + cloud progress so nothing completed is lost. */
+export function mergeStates(local: AppState, cloud: Partial<AppState>): AppState {
+  const done: Record<string, boolean> = { ...(cloud.done ?? {}) };
+  for (const [k, v] of Object.entries(local.done)) if (v) done[k] = true;
+  const spaces: Record<string, CourseSpace> = { ...local.spaces };
+  for (const [k, c] of Object.entries(cloud.spaces ?? {})) {
+    const l = spaces[k] ?? {};
+    const byId = <T extends { id: string }>(a: T[] = [], b: T[] = []) =>
+      [...new Map([...a, ...b].map((x) => [x.id, x])).values()];
+    spaces[k] = {
+      ...l,
+      ...c,
+      notes: c.notes || l.notes,
+      videoUrl: c.videoUrl || l.videoUrl,
+      bookmarks: byId(l.bookmarks, c.bookmarks),
+      materials: byId(l.materials, c.materials),
+    };
+  }
+  return { done, electives: { ...local.electives, ...(cloud.electives ?? {}) }, spaces };
+}
+
+export function resetState() {
+  setState(() => EMPTY, { sync: false });
 }
 
 function subscribe(l: () => void) {
