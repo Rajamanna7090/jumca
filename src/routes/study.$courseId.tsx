@@ -10,6 +10,7 @@ import { Ring, toneVar } from "@/components/kinetic";
 import { UnitRow } from "./index";
 import { cn } from "@/lib/utils";
 import { LectureExplorer } from "@/components/lecture-explorer";
+import { InkNotebook } from "@/components/ink-notebook";
 
 export const Route = createFileRoute("/study/$courseId")({
   loader: ({ params }) => {
@@ -218,13 +219,28 @@ function SidePane({ courseId, color, playerRef }: { courseId: string; color: str
 
 function Notes({ courseId }: { courseId: string }) {
   const state = useAppState();
+  const [mode, setMode] = useState<"ink" | "text">("ink");
+  const course = findCourse(courseId)!;
   return (
-    <textarea
-      value={state.spaces[courseId]?.notes ?? ""}
-      onChange={(e) => actions.updateSpace(courseId, { notes: e.target.value })}
-      placeholder="Write your notes… saved automatically."
-      className="min-h-[60vh] w-full resize-none rounded-2xl border bg-card p-4 text-sm leading-relaxed outline-none focus:border-primary"
-    />
+    <div className="flex flex-col gap-3">
+      <div className="flex gap-1 self-start rounded-full border p-0.5 text-xs">
+        {(["ink", "text"] as const).map((m) => (
+          <button key={m} onClick={() => setMode(m)} className={cn("rounded-full px-3 py-1", mode === m ? "bg-accent text-foreground" : "text-muted-foreground")}>
+            {m === "ink" ? "Handwriting" : "Typed"}
+          </button>
+        ))}
+      </div>
+      {mode === "ink" ? (
+        <InkNotebook courseId={courseId} title={course.title} />
+      ) : (
+        <textarea
+          value={state.spaces[courseId]?.notes ?? ""}
+          onChange={(e) => actions.updateSpace(courseId, { notes: e.target.value })}
+          placeholder="Write your notes… saved automatically."
+          className="min-h-[60vh] w-full resize-none rounded-2xl border bg-card p-4 text-sm leading-relaxed outline-none focus:border-primary"
+        />
+      )}
+    </div>
   );
 }
 
