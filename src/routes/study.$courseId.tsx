@@ -1,7 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { ArrowLeft, Bookmark, Link2, ListChecks, NotebookPen, Plus, Search, Trash2, Youtube } from "lucide-react";
+import { ArrowLeft, BookOpen, Bookmark, Link2, ListChecks, NotebookPen, Plus, Search, Trash2, Youtube } from "lucide-react";
+import { BookList, BookViewer } from "@/components/book-viewer";
 import { findCourse, courseProgress } from "@/data/syllabus";
 import { actions, fmtTime, useAppState, youtubeId } from "@/lib/store";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
@@ -183,13 +184,16 @@ const TABS = [
   { id: "notes", label: "Notes", icon: NotebookPen },
   { id: "marks", label: "Timestamps", icon: Bookmark },
   { id: "files", label: "Materials", icon: Link2 },
+  { id: "books", label: "Books", icon: BookOpen },
 ] as const;
 
 function SidePane({ courseId, color, playerRef }: { courseId: string; color: string; playerRef: React.MutableRefObject<YTPlayer | null> }) {
   const [tab, setTab] = useState<(typeof TABS)[number]["id"]>("units");
+  const [book, setBook] = useState<string | null>(null);
   const course = findCourse(courseId)!;
   return (
     <div className="flex h-full flex-col">
+      <BookViewer book={book} onClose={() => setBook(null)} />
       <div className="flex gap-1 border-b p-2">
         {TABS.map((t) => (
           <button key={t.id} onClick={() => setTab(t.id)} className="relative flex flex-1 items-center justify-center gap-1.5 rounded-full px-2 py-2 text-xs font-medium">
@@ -210,6 +214,7 @@ function SidePane({ courseId, color, playerRef }: { courseId: string; color: str
             {tab === "notes" && <Notes courseId={courseId} />}
             {tab === "marks" && <Marks courseId={courseId} playerRef={playerRef} />}
             {tab === "files" && <Materials courseId={courseId} />}
+            {tab === "books" && (course.books.length ? <BookList books={course.books} onOpen={setBook} /> : <p className="text-sm text-muted-foreground">No textbooks listed for this course.</p>)}
           </motion.div>
         </AnimatePresence>
       </div>
