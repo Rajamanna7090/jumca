@@ -7,6 +7,7 @@ import { actions, useAppState } from "@/lib/store";
 import { CountUp, KineticText, Ring, toneVar } from "@/components/kinetic";
 import { cn } from "@/lib/utils";
 import { AccountButton } from "@/components/account-button";
+import { BookViewer } from "@/components/book-viewer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -167,6 +168,7 @@ function ElectivePicker() {
 function CourseCard({ course, tone, index }: { course: Course; tone: string; index: number }) {
   const state = useAppState();
   const [open, setOpen] = useState(false);
+  const [book, setBook] = useState<string | null>(null);
   const p = courseProgress(course, state.done);
   const color = toneVar(tone);
   return (
@@ -230,10 +232,11 @@ function CourseCard({ course, tone, index }: { course: Course; tone: string; ind
                   <BookOpen className="size-3" /> Books
                 </div>
                 {course.books.map((b) => (
-                  <a key={b} target="_blank" rel="noreferrer" href={`https://www.google.com/search?q=${encodeURIComponent(b)}`} className="block text-xs text-muted-foreground hover:text-foreground">
+                  <button key={b} onClick={() => setBook(b)} className="block py-0.5 text-left text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline">
                     {b}
-                  </a>
+                  </button>
                 ))}
+                <BookViewer book={book} onClose={() => setBook(null)} />
               </div>
             )}
           </motion.div>
