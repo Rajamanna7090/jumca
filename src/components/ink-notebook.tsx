@@ -88,7 +88,7 @@ export function InkNotebook({ courseId, title }: { courseId: string; title: stri
   const [pages, setPages] = useState<Page[]>([blank()]);
   const [idx, setIdx] = useState(0);
   const [tool, setTool] = useState<Tool>("pen");
-  const [color, setColor] = useState(COLORS[1]);
+  const [color, setColor] = useState<string>(COLORS[1]!);
   const [size, setSize] = useState(4);
   const [sel, setSel] = useState<string | null>(null);
   const [loaded, setLoaded] = useState(false);
@@ -97,7 +97,7 @@ export function InkNotebook({ courseId, title }: { courseId: string; title: stri
   const fileRef = useRef<HTMLInputElement>(null);
   const live = useRef<Stroke | null>(null);
   const drag = useRef<{ id: string; mode: "move" | "resize"; ox: number; oy: number; start: Img } | null>(null);
-  const page = pages[idx] ?? pages[0];
+  const page: Page = pages[idx] ?? pages[0] ?? blank();
 
   useEffect(() => {
     try {
@@ -232,7 +232,7 @@ export function InkNotebook({ courseId, title }: { courseId: string; title: stri
       hist.current.undo.push(ps); hist.current.redo = [];
       return ps.map((x, i) => (i === idx ? { ...x, images: [...x.images, ...imgs] } : x));
     });
-    setTool("select"); setSel(imgs[imgs.length - 1].id);
+    setTool("select"); setSel(imgs[imgs.length - 1]!.id);
   }, [idx]);
 
   useEffect(() => {
