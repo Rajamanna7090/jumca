@@ -6,7 +6,7 @@ export function JumcaMark({ className }: { className?: string }) {
     <svg viewBox="0 0 48 48" className={cn("jumca-mark", className)} aria-hidden="true">
       <defs>
         <linearGradient id="jm-flame" x1="0" y1="1" x2="0" y2="0">
-          <stop offset="0%" stopColor="var(--sem4)" />
+          <stop offset="0%" stopColor="var(--sem-4)" />
           <stop offset="100%" stopColor="var(--primary)" />
         </linearGradient>
         <radialGradient id="jm-glow">
