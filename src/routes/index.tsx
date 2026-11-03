@@ -52,6 +52,7 @@ function Dashboard() {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden font-mono text-xs text-muted-foreground sm:inline">JU · MCA 2-Year</span>
+            <Link to="/pyq" className="rounded-full border border-border px-3 py-1.5 text-xs transition hover:border-primary hover:text-primary">PYQs</Link>
             <AccountButton />
           </div>
         </header>
