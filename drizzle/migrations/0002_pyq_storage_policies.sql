@@ -1,0 +1,3 @@
+create policy "pyq read signed in" on storage.objects for select to authenticated using (bucket_id = 'pyqs');
+create policy "pyq admin insert" on storage.objects for insert to authenticated with check (bucket_id = 'pyqs' and public.has_role(auth.uid(), 'admin'));
+create policy "pyq admin delete" on storage.objects for delete to authenticated using (bucket_id = 'pyqs' and public.has_role(auth.uid(), 'admin'));
