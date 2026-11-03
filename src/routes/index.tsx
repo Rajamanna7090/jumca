@@ -12,9 +12,9 @@ import { BookViewer } from "@/components/book-viewer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Orbit — MCA Progress Tracker" },
+      { title: "JUMCA — MCA Progress Tracker" },
       { name: "description", content: "Track every unit of the 2-year MCA syllabus, pick electives and study with video and notes side by side." },
-      { property: "og:title", content: "Orbit — MCA Progress Tracker" },
+      { property: "og:title", content: "JUMCA — MCA Progress Tracker" },
       { property: "og:description", content: "Track every unit of the 2-year MCA syllabus with a premium study workspace." },
     ],
   }),
@@ -48,7 +48,7 @@ function Dashboard() {
             <span className="grid size-7 place-items-center rounded-full bg-primary text-primary-foreground">
               <Sparkles className="size-3.5" />
             </span>
-            Orbit
+            JUMCA
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden font-mono text-xs text-muted-foreground sm:inline">JU · MCA 2-Year</span>

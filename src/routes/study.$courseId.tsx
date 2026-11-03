@@ -21,9 +21,9 @@ export const Route = createFileRoute("/study/$courseId")({
   },
   head: ({ loaderData }) => ({
     meta: [
-      { title: `${loaderData?.title ?? "Study"} — Orbit Workspace` },
+      { title: `${loaderData?.title ?? "Study"} — JUMCA Workspace` },
       { name: "description", content: `Study ${loaderData?.title ?? "your course"} with lectures, notes and timestamps side by side.` },
-      { property: "og:title", content: `${loaderData?.title ?? "Study"} — Orbit Workspace` },
+      { property: "og:title", content: `${loaderData?.title ?? "Study"} — JUMCA Workspace` },
       { property: "og:description", content: "Video, notes and syllabus checklist in one workspace." },
     ],
   }),
