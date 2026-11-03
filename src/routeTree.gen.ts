@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PyqRouteImport } from './routes/pyq'
 import { Route as StudyCourseIdRouteImport } from './routes/study.$courseId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PyqRoute = PyqRouteImport.update({
+  id: '/pyq',
+  path: '/pyq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StudyCourseIdRoute = StudyCourseIdRouteImport.update({
@@ -25,27 +31,31 @@ const StudyCourseIdRoute = StudyCourseIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pyq': typeof PyqRoute
   '/study/$courseId': typeof StudyCourseIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pyq': typeof PyqRoute
   '/study/$courseId': typeof StudyCourseIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/pyq': typeof PyqRoute
   '/study/$courseId': typeof StudyCourseIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/study/$courseId'
+  fullPaths: '/' | '/pyq' | '/study/$courseId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/study/$courseId'
-  id: '__root__' | '/' | '/study/$courseId'
+  to: '/' | '/pyq' | '/study/$courseId'
+  id: '__root__' | '/' | '/pyq' | '/study/$courseId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PyqRoute: typeof PyqRoute
   StudyCourseIdRoute: typeof StudyCourseIdRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pyq': {
+      id: '/pyq'
+      path: '/pyq'
+      fullPath: '/pyq'
+      preLoaderRoute: typeof PyqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/study/$courseId': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PyqRoute: PyqRoute,
   StudyCourseIdRoute: StudyCourseIdRoute,
 }
 export const routeTree = rootRouteImport
