@@ -10,9 +10,9 @@ import { SEMESTERS } from "@/data/syllabus";
 export const Route = createFileRoute("/pyq")({
   head: () => ({
     meta: [
-      { title: "Previous Year Questions — JUMCA MCA" },
+      { title: "Previous Year Questions — JUMCA" },
       { name: "description", content: "Preview and download previous year question papers for the JU MCA 2-year program." },
-      { property: "og:title", content: "Previous Year Questions — JUMCA MCA" },
+      { property: "og:title", content: "Previous Year Questions — JUMCA" },
       { property: "og:description", content: "Past MCA exam papers, ready to preview and download." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
