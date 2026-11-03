@@ -1,3 +1,4 @@
+import { JumcaLogo } from "@/components/jumca-logo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
@@ -74,7 +75,7 @@ function PyqPage() {
       <div className="relative mx-auto max-w-5xl px-5 pb-24 pt-10 md:px-8">
         <header className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="size-4" /> Dashboard
+            <ArrowLeft className="size-4" /> <JumcaLogo size="sm" tagline={false} />
           </Link>
           <AccountButton />
         </header>

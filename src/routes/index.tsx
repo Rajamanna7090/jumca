@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { useMemo, useState, type ReactNode } from "react";
+import { JumcaLogo } from "@/components/jumca-logo";
 import { ArrowUpRight, BookOpen, Check, Flame, Sparkles } from "lucide-react";
 import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } from "@/data/syllabus";
 import { actions, useAppState } from "@/lib/store";
@@ -44,12 +45,7 @@ function Dashboard() {
       <div className="bg-aura pointer-events-none absolute inset-x-0 top-0 h-[600px]" />
       <div className="relative mx-auto max-w-6xl px-5 pb-24 pt-10 md:px-8">
         <header className="flex items-center justify-between">
-          <div className="flex items-center gap-2 font-display text-sm tracking-tight">
-            <span className="grid size-7 place-items-center rounded-full bg-primary text-primary-foreground">
-              <Sparkles className="size-3.5" />
-            </span>
-            JUMCA
-          </div>
+          <Link to="/" aria-label="JUMCA home"><JumcaLogo /></Link>
           <div className="flex items-center gap-3">
             <span className="hidden font-mono text-xs text-muted-foreground sm:inline">JU · MCA 2-Year</span>
             <Link to="/pyq" className="rounded-full border border-border px-3 py-1.5 text-xs transition hover:border-primary hover:text-primary">PYQs</Link>
