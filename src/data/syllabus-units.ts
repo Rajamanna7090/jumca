@@ -32,8 +32,8 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Addition and subt raction of numbers in different number systems",
     "Different methods of negative number representation",
     "signed magnitude",
-    "one’s complement",
-    "two’s complement",
+    "one’scomplement",
+    "two’scomplement",
     "subtraction using complements"
    ]
   ],
@@ -60,7 +60,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    "Introduction to C Programming",
    2,
    [
-    "Introduction to C programming",
+    "Introduction to Cprogramming",
     "Variables",
     "Data Types",
     "Operator and Expression: Identifier and Keyword",
@@ -120,7 +120,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    [
     "Mesh analysis",
     "Superposition theorem",
-    "Thevenin’s and Norton’s theorems",
+    "Thevenin’sand Norton’stheorems",
     "Maximum Power Transfer theorem"
    ]
   ],
@@ -144,12 +144,12 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    ]
   ],
   [
-   "p-n junction Diodes",
+   "p-njunction Diodes",
    4,
    [
-    "Energy band diagram of p-n junction in equilibrium",
+    "Energy band diagram of p-njunction in equilibrium",
     "under forward and reverse bias",
-    "I-V characteristics",
+    "I-Vcharacteristics",
     "breakdown mechanisms",
     "Zener diode",
     "LED"
@@ -180,7 +180,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "CC configurations",
     "Input",
     "output characteristics",
-    "R-C coupled amplifiers",
+    "R-Ccoupled amplifiers",
     "Oscillators"
    ]
   ]
@@ -190,8 +190,8 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    "Arrays",
    3,
    [
-    "1-D arrays",
-    "2-D arrays"
+    "1-Darrays",
+    "2-Darrays"
    ]
   ],
   [
@@ -207,7 +207,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "void pointer",
     "static vs. Dynamic memory allocation",
     "array of pointers",
-    "s tring handling using pointers",
+    "string handling using pointers",
     "pointer to a function",
     "function returning pointer"
    ]
@@ -330,7 +330,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Sampling Distributions",
     "Central Limit Theorems",
     "Confidence interval",
-    "Hypothesis Test ing",
+    "Hypothesis Testing",
     "Chi-square tests and other testing methods"
    ]
   ],
@@ -355,7 +355,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Semi -group and Monoid",
     "Group and Subgroup",
     "Cosets",
-    "Lagrange’s theorem",
+    "Lagrange’stheorem",
     "Cyclic group",
     "Order of a group",
     "Generators",
@@ -752,7 +752,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Definition",
     "Making change problem",
     "0-1 Knapsack Problem",
-    "Floyd’s algorithm for shortest paths",
+    "Floyd’salgorithm for shortest paths",
     "Chained Matrix Multiplication"
    ]
   ],
@@ -1018,8 +1018,8 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    8,
    [
     "memory mapped",
-    "standard (isolated) and linear selection techniques of I/O addressing. Data transfer through programmed I/O",
-    "interrupt and DMA I/O processors. Data transfer over synchronous and asynchronous buses",
+    "standard (isolated) and linear selection techniques of I/Oaddressing. Data transfer through programmed I/O",
+    "interrupt and DMA I/Oprocessors. Data transfer over synchronous and asynchronous buses",
     "discussions on some standard interface buses"
    ]
   ],
@@ -1107,7 +1107,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "resource allocation graph",
     "prevention techniques",
     "avoidance technique",
-    "Banker’s algorithm and related algorithms"
+    "Banker’salgorithm and related algorithms"
    ]
   ],
   [
@@ -1371,7 +1371,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Software Architecture - Architectural styles",
     "architectural patterns",
     "analysis of architectures",
-    "f ormal descriptions of software architectures",
+    "formal descriptions of software architectures",
     "architectural description languages and tools",
     "scalability and interoperability issues",
     "Web Engineering Architectures - case studies with example"
@@ -1407,7 +1407,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Methods of evaluating clustering- Assessing Clustering tendency",
     "Determination number of clusters",
     "Measuring Cluste ring quality",
-    "Methods for estimating a classifier’s accuracy: Holdout method",
+    "Methods for estimating a classifier’saccuracy: Holdout method",
     "Random subsampling",
     "Cross validation",
     "Bootstrap. Classifier Evaluation Metrics: Accuracy",
@@ -1642,7 +1642,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    10,
    [
     "Introduction",
-    "Performance m etrics",
+    "Performance metrics",
     "IP Addressing",
     "Subnetting",
     "Routing Algorithms (Link State",
@@ -1778,7 +1778,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    [
     "Category Elective-1 Course title Machine Learning Scheme and Credits L–T–P: 3",
     "Credits: 3 Semester Pre-requisites (if any) Syllabus What is machine learning? Why machine learning? A pplications of machine Learning",
-    "types o f machine Learning"
+    "types o fmachine Learning"
    ]
   ],
   [
@@ -1997,7 +1997,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "ANOVA",
     "t -test",
     "Wilcoxon signed- rank test",
-    "Spearman’s rank -order correlation",
+    "Spearman’srank -order correlation",
     "error",
     "sampling",
     "normalization"
@@ -2286,7 +2286,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "PaaS",
     "SaaS",
     "XaaS)",
-    "P arallel processing in the cloud",
+    "Parallel processing in the cloud",
     "Distributed storage systems",
     "Virtualization"
    ]
@@ -2745,7 +2745,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    4,
    [
     "Basic features of 8085 microprocessors and its addressing modes",
-    "8085 microprocessor architecture. Memory and I/O interfacing"
+    "8085 microprocessor architecture. Memory and I/Ointerfacing"
    ]
   ],
   [
@@ -2756,7 +2756,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Address aliasing",
     "Memory read and write operations",
     "Ti ming diagrams",
-    "Memory mapped I/O and I/O mapped I/O. Programming of 8085"
+    "Memory mapped I/Oand I/Omapped I/O. Programming of 8085"
    ]
   ],
   [
@@ -2856,10 +2856,10 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    4,
    [
     "DDA algorithm",
-    "Bresenham’s algorithm",
+    "Bresenham’salgorithm",
     "Midpoint algorithm Scan conversion of Circles: Polynomial method",
     "DDA algorithm",
-    "Bresenham’s algorithm",
+    "Bresenham’salgorithm",
     "Midpoint algorithm. Scan conversion of Ellipses: DDA algorithm",
     "Midpoint algorithm Generations of solid areas"
    ]
@@ -2894,7 +2894,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    ]
   ],
   [
-   "2-D viewing and Clipping",
+   "2-Dviewing and Clipping",
    6,
    []
   ],
@@ -2922,7 +2922,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
    4,
    [
     "Z-buffer algorithm",
-    "Warnock’s algorithm. Illumination model",
+    "Warnock’salgorithm. Illumination model",
     "colour",
     "shading"
    ]
@@ -3030,7 +3030,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Block based encoding",
     "Contour encoding. Frequency Domain methods: DCT",
     "FFT",
-    "K-L transform",
+    "K-Ltransform",
     "JPEG. Image Understanding"
    ]
   ]
@@ -3104,7 +3104,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Gene regulation",
     "binding sites",
     "transcriptional networks",
-    "gene’s circuitry"
+    "gene’scircuitry"
    ]
   ],
   [
