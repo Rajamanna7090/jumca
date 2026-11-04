@@ -29,7 +29,7 @@ export const SYLLABUS_UNITS: Record<string, [string, number, string[]][]> = {
     "Decimal",
     "Binary",
     "Octal and Hexadecimal (Whole numbers and fractions)",
-    "Addition and subt raction of numbers in different number systems",
+    "Addition and subtraction of numbers in different number systems",
     "Different methods of negative number representation",
     "signed magnitude",
     "one’scomplement",
