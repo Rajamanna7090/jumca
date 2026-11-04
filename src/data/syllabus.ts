@@ -260,10 +260,22 @@ export function activeCourses(electives: ProgressState["electives"]) {
   return ALL_COURSES.filter((c) => !c.elective || electives[c.elective] === c.id);
 }
 
+export const subId = (unitId: string, i: number) => `${unitId}-s${i}`;
+
+/** Fraction (0-1) of a unit done: full if the unit is ticked, else share of ticked subtopics. */
+export function unitFraction(unit: Unit, done: ProgressState["done"]) {
+  if (done[unit.id]) return 1;
+  const n = unit.subtopics.length;
+  if (!n) return 0;
+  let k = 0;
+  for (let i = 0; i < n; i++) if (done[subId(unit.id, i)]) k++;
+  return k / n;
+}
+
 export function courseProgress(course: Course, done: ProgressState["done"]) {
   const total = course.units.reduce((a, x) => a + x.lectures, 0);
-  const completed = course.units.filter((x) => done[x.id]).reduce((a, x) => a + x.lectures, 0);
-  return { total, completed, pct: total ? completed / total : 0 };
+  const completed = course.units.reduce((a, x) => a + x.lectures * unitFraction(x, done), 0);
+  return { total, completed: Math.round(completed * 10) / 10, pct: total ? completed / total : 0 };
 }
 
 export function overallStats(state: ProgressState) {
