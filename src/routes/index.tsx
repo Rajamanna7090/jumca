@@ -220,7 +220,7 @@ function CourseCard({ course, tone, index }: { course: Course; tone: string; ind
           >
             <ul className="mt-4 space-y-1">
               {course.units.map((unit) => (
-                <UnitRow key={unit.id} id={unit.id} title={unit.title} lectures={unit.lectures} color={color} />
+                <UnitRow key={unit.id} id={unit.id} title={unit.title} lectures={unit.lectures} subtopics={unit.subtopics} color={color} />
               ))}
             </ul>
             {course.books.length > 0 && (
@@ -243,12 +243,14 @@ function CourseCard({ course, tone, index }: { course: Course; tone: string; ind
   );
 }
 
-export function UnitRow({ id, title, lectures, color }: { id: string; title: string; lectures: number; color: string }) {
+export function UnitRow({ id, title, lectures, subtopics = [], color }: { id: string; title: string; lectures: number; subtopics?: string[]; color: string }) {
   const state = useAppState();
   const done = !!state.done[id];
+  const [open, setOpen] = useState(false);
   return (
     <li>
-      <button onClick={() => actions.toggleUnit(id)} className="flex w-full items-center gap-3 rounded-xl px-2 py-2 text-left transition-colors hover:bg-accent">
+      <div className="flex w-full items-center gap-1 rounded-xl transition-colors hover:bg-accent">
+      <button onClick={() => actions.toggleUnit(id)} className="flex flex-1 items-center gap-3 px-2 py-2 text-left">
         <motion.span
           animate={{ scale: done ? [1, 1.25, 1] : 1, backgroundColor: done ? color : "rgba(0,0,0,0)" }}
           transition={{ duration: 0.35 }}
@@ -260,6 +262,28 @@ export function UnitRow({ id, title, lectures, color }: { id: string; title: str
         <span className={cn("flex-1 text-sm transition-colors", done && "text-muted-foreground line-through")}>{title}</span>
         <span className="font-mono text-[11px] text-muted-foreground">{lectures}L</span>
       </button>
+      {subtopics.length > 0 && (
+        <button onClick={() => setOpen((o) => !o)} aria-label={open ? "Hide subtopics" : "Show subtopics"} className="mr-1 flex items-center gap-1 rounded-lg px-2 py-1 font-mono text-[10px] text-muted-foreground hover:text-foreground">
+          {subtopics.length}
+          <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
+        </button>
+      )}
+      </div>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.ul
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-wrap gap-1.5 overflow-hidden pb-2 pl-10 pr-2"
+          >
+            {subtopics.map((t, i) => (
+              <li key={i} className="rounded-md border border-border/60 bg-card/40 px-2 py-0.5 text-[11px] text-muted-foreground">{t}</li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </li>
   );
 }
