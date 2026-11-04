@@ -1,9 +1,12 @@
+import { SYLLABUS_UNITS } from "./syllabus-units";
+
 export type Tag = "gate" | "interview";
 
 export interface Unit {
   id: string;
   title: string;
   lectures: number;
+  subtopics: string[];
 }
 
 export interface Course {
@@ -25,8 +28,11 @@ export interface Semester {
   courses: Course[];
 }
 
-const u = (courseId: string, list: [string, number][]): Unit[] =>
-  list.map(([title, lectures], i) => ({ id: `${courseId}-u${i + 1}`, title, lectures }));
+const u = (courseId: string, list: [string, number][]): Unit[] => {
+  const full = SYLLABUS_UNITS[courseId];
+  const rows: [string, number, string[]][] = full?.length ? full : list.map(([t, l]) => [t, l, []]);
+  return rows.map(([title, lectures, subtopics], i) => ({ id: `${courseId}-u${i + 1}`, title, lectures, subtopics }));
+};
 
 const c = (
   id: string,
