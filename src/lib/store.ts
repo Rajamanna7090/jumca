@@ -94,8 +94,27 @@ export function useAppState() {
 }
 
 export const actions = {
-  toggleUnit: (id: string) =>
-    setState((s) => ({ ...s, done: { ...s.done, [id]: !s.done[id] } })),
+  /** Ticking a unit ticks/unticks all its subtopics too. */
+  toggleUnit: (id: string, subCount = 0) =>
+    setState((s) => {
+      const v = !s.done[id];
+      const done = { ...s.done, [id]: v };
+      for (let i = 0; i < subCount; i++) done[`${id}-s${i}`] = v;
+      return { ...s, done };
+    }),
+  /** Ticking a subtopic; unit becomes done when all subtopics are done. */
+  toggleSub: (unitId: string, i: number, subCount: number) =>
+    setState((s) => {
+      const done = { ...s.done };
+      // If unit was fully ticked (legacy), expand into subtopics first.
+      if (done[unitId]) for (let j = 0; j < subCount; j++) done[`${unitId}-s${j}`] = true;
+      const k = `${unitId}-s${i}`;
+      done[k] = !done[k];
+      let all = true;
+      for (let j = 0; j < subCount; j++) if (!done[`${unitId}-s${j}`]) all = false;
+      done[unitId] = all;
+      return { ...s, done };
+    }),
   setElective: (basket: "I" | "II" | "III", id: string) =>
     setState((s) => ({ ...s, electives: { ...s.electives, [basket]: id } })),
   updateSpace: (courseId: string, patch: Partial<CourseSpace>) =>
