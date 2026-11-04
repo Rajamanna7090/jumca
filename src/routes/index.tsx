@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import { useMemo, useState, type ReactNode } from "react";
 import { JumcaLogo } from "@/components/jumca-logo";
-import { ArrowUpRight, BookOpen, Check, Flame, Sparkles } from "lucide-react";
+import { ArrowUpRight, BookOpen, Check, ChevronDown, Flame, Sparkles } from "lucide-react";
 import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } from "@/data/syllabus";
 import { actions, useAppState } from "@/lib/store";
 import { CountUp, KineticText, Ring, toneVar } from "@/components/kinetic";
