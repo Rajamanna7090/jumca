@@ -5,7 +5,7 @@ import { JumcaLogo } from "@/components/jumca-logo";
 import { ArrowUpRight, BookOpen, Check, ChevronDown, Flame, Sparkles } from "lucide-react";
 import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } from "@/data/syllabus";
 import { actions, useAppState } from "@/lib/store";
-import { CountUp, KineticText, Ring, toneVar } from "@/components/kinetic";
+import { CountUp, Ring, toneVar } from "@/components/kinetic";
 import { cn } from "@/lib/utils";
 import { AccountButton } from "@/components/account-button";
 import { BookViewer } from "@/components/book-viewer";
