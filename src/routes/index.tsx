@@ -48,7 +48,9 @@ function Dashboard() {
           <Link to="/" aria-label="JUMCA home"><JumcaLogo /></Link>
           <div className="flex items-center gap-3">
             <span className="hidden font-mono text-xs text-muted-foreground sm:inline">JU · MCA 2-Year</span>
-            <Link to="/pyq" className="rounded-full border border-border px-3 py-1.5 text-xs transition hover:border-primary hover:text-primary">PYQs</Link>
+            <Link to="/pyq" className="inline-flex items-center gap-1.5 rounded-full border border-primary/50 bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground shadow-glow transition hover:brightness-110">
+              <BookOpen className="size-3.5" /> PYQs
+            </Link>
             <AccountButton />
           </div>
         </header>
