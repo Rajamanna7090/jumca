@@ -250,7 +250,7 @@ export function UnitRow({ id, title, lectures, subtopics = [], color }: { id: st
   return (
     <li>
       <div className="flex w-full items-center gap-1 rounded-xl transition-colors hover:bg-accent">
-      <button onClick={() => actions.toggleUnit(id)} className="flex flex-1 items-center gap-3 px-2 py-2 text-left">
+      <button onClick={() => actions.toggleUnit(id, subtopics.length)} className="flex flex-1 items-center gap-3 px-2 py-2 text-left">
         <motion.span
           animate={{ scale: done ? [1, 1.25, 1] : 1, backgroundColor: done ? color : "rgba(0,0,0,0)" }}
           transition={{ duration: 0.35 }}
@@ -264,7 +264,7 @@ export function UnitRow({ id, title, lectures, subtopics = [], color }: { id: st
       </button>
       {subtopics.length > 0 && (
         <button onClick={() => setOpen((o) => !o)} aria-label={open ? "Hide subtopics" : "Show subtopics"} className="mr-1 flex items-center gap-1 rounded-lg px-2 py-1 font-mono text-[10px] text-muted-foreground hover:text-foreground">
-          {subtopics.length}
+          {done ? subtopics.length : subtopics.filter((_, i) => state.done[`${id}-s${i}`]).length}/{subtopics.length}
           <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
         </button>
       )}
@@ -278,9 +278,23 @@ export function UnitRow({ id, title, lectures, subtopics = [], color }: { id: st
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex flex-wrap gap-1.5 overflow-hidden pb-2 pl-10 pr-2"
           >
-            {subtopics.map((t, i) => (
-              <li key={i} className="rounded-md border border-border/60 bg-card/40 px-2 py-0.5 text-[11px] text-muted-foreground">{t}</li>
-            ))}
+            {subtopics.map((t, i) => {
+              const sd = done || !!state.done[`${id}-s${i}`];
+              return (
+                <li key={i}>
+                  <button
+                    onClick={() => actions.toggleSub(id, i, subtopics.length)}
+                    className={cn("flex items-center gap-1.5 rounded-md border px-2 py-0.5 text-left text-[11px] transition-colors", sd ? "text-foreground" : "border-border/60 bg-card/40 text-muted-foreground hover:text-foreground")}
+                    style={sd ? { borderColor: color, backgroundColor: `color-mix(in oklab, ${color} 18%, transparent)` } : undefined}
+                  >
+                    <span className="grid size-3 shrink-0 place-items-center rounded-sm border" style={sd ? { borderColor: color, backgroundColor: color } : undefined}>
+                      {sd && <Check className="size-2.5 text-primary-foreground" strokeWidth={3} />}
+                    </span>
+                    {t}
+                  </button>
+                </li>
+              );
+            })}
           </motion.ul>
         )}
       </AnimatePresence>
