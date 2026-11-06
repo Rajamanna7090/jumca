@@ -291,5 +291,5 @@ export function overallStats(state: ProgressState) {
     totalCredits += c.credits;
     if (p.total && p.completed === p.total) credits += c.credits;
   }
-  return { total, completed, credits, totalCredits, pct: total ? completed / total : 0 };
+  return { total, completed: Math.round(completed), credits, totalCredits, pct: total ? completed / total : 0 };
 }
