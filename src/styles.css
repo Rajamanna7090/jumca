@@ -173,3 +173,19 @@
 @keyframes jm-draw { from { stroke-dashoffset: 60; } to { stroke-dashoffset: 0; } }
 @keyframes jm-sweep { to { background-position: -200% 0; } }
 @media (prefers-reduced-motion: reduce) { .jumca-mark *, .jumca-logo .jm-ju { animation: none !important; } }
+
+/* Cosmic nebula glow behind the starfield */
+.starfield { background: oklch(0.1 0.01 265); }
+.starfield-nebula {
+  background:
+    radial-gradient(ellipse 38% 55% at 50% 30%, oklch(0.1 0.01 265) 0%, oklch(0.1 0.01 265 / 85%) 35%, transparent 70%),
+    radial-gradient(ellipse 70% 85% at 50% 45%, oklch(0.42 0.26 264 / 90%) 0%, oklch(0.32 0.22 266 / 60%) 40%, transparent 72%),
+    radial-gradient(ellipse 60% 40% at 15% 100%, oklch(0.35 0.22 266 / 55%) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 85% 100%, oklch(0.35 0.22 266 / 55%) 0%, transparent 70%);
+  filter: blur(30px);
+  animation: nebula-breathe 14s ease-in-out infinite alternate;
+}
+@keyframes nebula-breathe {
+  from { transform: scale(1) translateY(0); opacity: 0.9; }
+  to { transform: scale(1.06) translateY(-1.5%); opacity: 1; }
+}
