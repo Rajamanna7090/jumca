@@ -5,10 +5,11 @@ import { JumcaLogo } from "@/components/jumca-logo";
 import { ArrowUpRight, BookOpen, Check, ChevronDown, Flame, Sparkles } from "lucide-react";
 import { SEMESTERS, courseProgress, overallStats, type Course, type Semester } from "@/data/syllabus";
 import { actions, useAppState } from "@/lib/store";
-import { CountUp, KineticText, Ring, toneVar } from "@/components/kinetic";
+import { CountUp, Ring, toneVar } from "@/components/kinetic";
 import { cn } from "@/lib/utils";
 import { AccountButton } from "@/components/account-button";
 import { BookViewer } from "@/components/book-viewer";
+import { QuoteFlipper } from "@/components/quote-flipper";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,9 +59,7 @@ function Dashboard() {
         <section className="mt-16 md:mt-24">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Your syllabus, in motion</p>
           <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.02] tracking-tight md:text-7xl">
-            <KineticText text="Master every unit." />
-            <br />
-            <KineticText text="Ship your degree." className="text-muted-foreground" delay={0.3} />
+            <QuoteFlipper />
           </h1>
 
           <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
