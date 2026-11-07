@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
-type Star = { x: number; y: number; r: number; a: number; tw: number; ph: number; vy: number; vx: number; glow: boolean };
+type Star = { x: number; y: number; r: number; base: number; peak: number; per: number; ph: number; vx: number; vy: number; glow: boolean };
 
-/** Deep-space nebula glow + drifting, twinkling starfield (canvas). */
+/** Emergent-style cosmic background: cobalt arch nebula + slow zero-g drifting, breathing stars. */
 export function Starfield() {
   const ref = useRef<HTMLCanvasElement>(null);
 
@@ -16,17 +16,20 @@ export function Starfield() {
     let stars: Star[] = [];
 
     const make = (): Star => {
-      const depth = Math.random();
+      const d = Math.random();
+      const ang = Math.random() * Math.PI * 2;
+      const sp = 3 + Math.random() * 9; // px/s — gentle zero-g drift
       return {
         x: Math.random() * w,
         y: Math.random() * h,
-        r: 0.3 + depth * depth * 1.5,
-        a: 0.25 + depth * 0.75,
-        tw: 0.4 + Math.random() * 1.6,
+        r: d < 0.7 ? 0.5 + Math.random() * 0.5 : d < 0.93 ? 0.9 + Math.random() * 0.6 : 1.4 + Math.random() * 0.8,
+        base: 0.12 + Math.random() * 0.25,
+        peak: 0.6 + Math.random() * 0.4,
+        per: 2.5 + Math.random() * 3.5,
         ph: Math.random() * Math.PI * 2,
-        vy: -(2 + depth * 10),
-        vx: (Math.random() - 0.5) * 3,
-        glow: depth > 0.85,
+        vx: Math.cos(ang) * sp,
+        vy: Math.sin(ang) * sp,
+        glow: d > 0.93,
       };
     };
 
@@ -35,7 +38,7 @@ export function Starfield() {
       w = window.innerWidth; h = window.innerHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(380, (w * h) / 4500));
+      const n = Math.round(Math.min(320, (w * h) / 5500));
       stars = Array.from({ length: n }, make);
     };
 
@@ -46,20 +49,22 @@ export function Starfield() {
       const s = t / 1000;
       for (const st of stars) {
         if (!reduce) {
-          st.y += st.vy * dt; st.x += st.vx * dt;
-          if (st.y < -4) { st.y = h + 4; st.x = Math.random() * w; }
+          st.x += st.vx * dt; st.y += st.vy * dt;
           if (st.x < -4) st.x = w + 4; else if (st.x > w + 4) st.x = -4;
+          if (st.y < -4) st.y = h + 4; else if (st.y > h + 4) st.y = -4;
         }
-        const tw = 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(s * st.tw + st.ph));
-        const alpha = st.a * tw;
-        if (st.glow) {
-          const g = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, st.r * 5);
-          g.addColorStop(0, `rgba(220,230,255,${alpha * 0.55})`);
-          g.addColorStop(1, "rgba(220,230,255,0)");
+        // smooth breathing: mostly faint, eases up to a bright peak
+        const k = Math.pow(0.5 + 0.5 * Math.sin((s / st.per) * Math.PI * 2 + st.ph), 3);
+        const alpha = st.base + (st.peak - st.base) * k;
+        if (st.glow || k > 0.6) {
+          const R = st.r * (st.glow ? 6 : 4);
+          const g = ctx.createRadialGradient(st.x, st.y, 0, st.x, st.y, R);
+          g.addColorStop(0, `rgba(200,215,255,${alpha * 0.5})`);
+          g.addColorStop(1, "rgba(200,215,255,0)");
           ctx.fillStyle = g;
-          ctx.beginPath(); ctx.arc(st.x, st.y, st.r * 5, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(st.x, st.y, R, 0, Math.PI * 2); ctx.fill();
         }
-        ctx.fillStyle = `rgba(235,240,255,${alpha})`;
+        ctx.fillStyle = `rgba(240,244,255,${alpha})`;
         ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2); ctx.fill();
       }
       raf = requestAnimationFrame(frame);
