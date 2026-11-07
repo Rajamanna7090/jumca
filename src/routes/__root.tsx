@@ -1,4 +1,5 @@
 import { Starfield } from "@/components/starfield";
+import { SolarFlare } from "@/components/solar-flare";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -128,6 +129,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Starfield />
+      <SolarFlare />
       <div className="relative z-10">
         <Outlet />
       </div>
